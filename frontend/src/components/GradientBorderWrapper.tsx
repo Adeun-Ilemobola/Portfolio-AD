@@ -1,25 +1,29 @@
 import { motion } from "framer-motion";
+import React from "react";
 
-const WaveBorderWrapper: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+function WaveBorderWrapper({ children, classs = "" }: { children: React.ReactNode; classs?: string }) {
   return (
-    <div className="relative p-[3px]">
+    <div className={`relative inline-block p-1 rounded-sm  border-gray-500`}>
       {/* Animated Border */}
       <motion.div
-        className="absolute block inset-0 rounded-md p-[1px]"
+        className={` rounded-sm p-1 overflow-hidden`}
         style={{
-          background: "linear-gradient(90deg, #0A192F, #1A2A4F, #FFFFFF, #1A2A4F, #0A192F)", // Navy to white wave effect
+          background: "linear-gradient(90deg, #0A192F, #1A2A4F, #FFFFFF, #1A2A4F, #0A192F)",
           backgroundSize: "300% 100%",
+         
         }}
-        animate={{ backgroundPositionX: ["1%", "100%", "1%"] }} // Moves like a wave
-        transition={{ duration: 14, ease: "easeInOut", repeat: Infinity, repeatType: "mirror" }} // Smooth back and forth
-      />
+        animate={{ backgroundPositionX: ["0%", "100%", "0%"] }}
+        transition={{ duration: 8, ease: "easeInOut", repeat: Infinity, repeatType: "mirror" }}
+      >
+        <div className="relative z-10 ">
+          {children}
+        </div>
 
-      {/* Inner content with a subtle border */}
-      <div className="relative z-10 rounded-md bg-black p-2  border-gray-800">
-        {children}
-      </div>
+
+      </motion.div>
+
     </div>
   );
-};
+}
 
 export default WaveBorderWrapper;
